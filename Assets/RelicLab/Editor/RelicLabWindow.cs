@@ -172,6 +172,22 @@ namespace RelicLab.EditorTools
             AddPresetButton(presetRow, renderer, material, SolarPreset);
             rootVisualElement.Add(presetRow);
 
+            AddSectionTitle("CREATE MATERIAL VARIANT");
+
+            rootVisualElement.Add(new HelpBox(
+                "Create a separate material asset from a preset. The current material is preserved.",
+                HelpBoxMessageType.Info));
+
+            VisualElement variantRow = new VisualElement();
+            variantRow.style.flexDirection = FlexDirection.Row;
+            variantRow.style.flexWrap = Wrap.Wrap;
+            variantRow.style.marginBottom = 8;
+
+            AddVariantButton(variantRow, renderer, material, ArcanePreset);
+            AddVariantButton(variantRow, renderer, material, ToxicPreset);
+            AddVariantButton(variantRow, renderer, material, SolarPreset);
+            rootVisualElement.Add(variantRow);
+
             AddSectionTitle("MATERIAL PARAMETERS");
 
             AddColorControl(material, BaseColor, "Base Color");
@@ -234,6 +250,23 @@ namespace RelicLab.EditorTools
 
             button.style.flexGrow = 1;
             button.style.minWidth = 74;
+            button.style.marginRight = 4;
+            parent.Add(button);
+        }
+
+        private void AddVariantButton(
+            VisualElement parent,
+            Renderer renderer,
+            Material material,
+            MaterialPreset preset)
+        {
+            Button button = new Button(() => CreateMaterialVariant(renderer, material, preset))
+            {
+                text = "Create " + preset.Name
+            };
+
+            button.style.flexGrow = 1;
+            button.style.minWidth = 90;
             button.style.marginRight = 4;
             parent.Add(button);
         }
@@ -319,21 +352,63 @@ namespace RelicLab.EditorTools
             BuildUI();
         }
 
+        private void CreateMaterialVariant(Renderer renderer, Material source, MaterialPreset preset)
+        {
+            EnsureGeneratedFolderExists();
+
+            string path = AssetDatabase.GenerateUniqueAssetPath(
+                GeneratedFolder + "/M_Relic_" + MakeSafeFileName(preset.Name) + ".mat");
+
+            Material variant = new Material(source)
+            {
+                name = System.IO.Path.GetFileNameWithoutExtension(path)
+            };
+
+            ApplyPresetValues(variant, preset);
+            AssetDatabase.CreateAsset(variant, path);
+            AssetDatabase.SaveAssets();
+
+            Undo.RecordObject(renderer, "Assign Relic Lab " + preset.Name + " Material");
+
+            Material[] materials = renderer.sharedMaterials;
+
+            if (materials == null || materials.Length == 0)
+            {
+                materials = new[] { variant };
+            }
+            else
+            {
+                materials[0] = variant;
+            }
+
+            renderer.sharedMaterials = materials;
+            EditorUtility.SetDirty(renderer);
+
+            targetObject = renderer.gameObject;
+            Selection.activeObject = variant;
+            BuildUI();
+        }
+
         private void ApplyPreset(Renderer renderer, Material material, MaterialPreset preset)
         {
             Undo.RecordObject(material, "Apply Relic Lab " + preset.Name + " Preset");
 
+            ApplyPresetValues(material, preset);
+
+            EditorUtility.SetDirty(material);
+            EditorUtility.SetDirty(renderer);
+
+            BuildUI();
+        }
+
+        private static void ApplyPresetValues(Material material, MaterialPreset preset)
+        {
             SetColorIfSupported(material, BaseColor, preset.BaseColor);
             SetColorIfSupported(material, EmissionColor, preset.EmissionColor);
             SetFloatIfSupported(material, EmissionIntensity, preset.EmissionIntensity);
             SetFloatIfSupported(material, RimPower, preset.RimPower);
             SetFloatIfSupported(material, RimIntensity, preset.RimIntensity);
             SetFloatIfSupported(material, AnimationSpeed, preset.AnimationSpeed);
-
-            EditorUtility.SetDirty(material);
-            EditorUtility.SetDirty(renderer);
-
-            BuildUI();
         }
 
         private static void SetColorIfSupported(Material material, string property, Color value)

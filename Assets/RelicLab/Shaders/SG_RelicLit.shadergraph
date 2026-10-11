@@ -3092,7 +3092,7 @@
     "m_StageCapability": 3,
     "m_CustomBinding": "",
     "m_Value": {
-        "e00": 0.125,
+        "e00": 0.3499999940395355,
         "e01": 2.0,
         "e02": 2.0,
         "e03": 2.0,
@@ -3142,7 +3142,7 @@
     "m_StageCapability": 3,
     "m_CustomBinding": "",
     "m_Value": {
-        "x": 0.875,
+        "x": 0.6499999761581421,
         "y": 0.0,
         "z": 0.0,
         "w": 0.0
