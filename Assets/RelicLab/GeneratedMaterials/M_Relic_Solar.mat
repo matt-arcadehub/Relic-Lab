@@ -38,12 +38,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AnimationSpeed: 1
-    - _EmissionIntensity: 2
+    - _AnimationSpeed: 1.2
+    - _EmissionIntensity: 0.8
+    - _Metallic: 0.9
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RimIntensity: 7
-    - _RimPower: 1
+    - _RimIntensity: 2
+    - _RimPower: 2.3
+    - _Smoothness: 0.8
     m_Colors:
     - _BaseColor: {r: 0.55, g: 0.16, b: 0.025, a: 1}
     - _EmissionColor: {r: 1, g: 0.36, b: 0.055, a: 1}
