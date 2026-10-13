@@ -4,7 +4,7 @@
 
 Relic Lab combines a custom **URP Shader Graph** with a **C# EditorWindow** to make material experimentation faster and safer. Artists and developers can explore three visual presets, adjust shader parameters with immediate feedback, and decide whether to apply, discard, or save their work as a separate material asset.
 
-> **Status:** Portfolio prototype — functional material editing workflow. Visual presentation and demo media are in progress.
+> **Status:** Portfolio prototype — functional material editing workflow and three-relic showcase scene. Screenshots and demo video are in progress.
 
 ## Features
 
@@ -14,6 +14,7 @@ Relic Lab combines a custom **URP Shader Graph** with a **C# EditorWindow** to m
 - **Create material variants:** Generate independent material assets from the built-in presets without automatically assigning them to the selected object.
 - **Save Preview As New Material:** Save the current preview as a new `.mat` asset while preserving the original material and the object's material assignment.
 - **Safe working copies:** Create a generated material copy before editing materials outside the tool's generated-materials folder.
+- **Relic showcase:** Preview three distinct stylized relic models in a dedicated scene with pedestals and presentation lighting.
 
 ## Tech Stack
 
@@ -21,11 +22,12 @@ Relic Lab combines a custom **URP Shader Graph** with a **C# EditorWindow** to m
 - **Render pipeline:** Universal Render Pipeline (URP)
 - **Shader:** Unity Shader Graph (Lit)
 - **Editor tooling:** C#, Unity Editor API, UI Toolkit
+- **3D modeling:** Autodesk Maya (low-poly FBX assets)
 
 ## Getting Started
 
 1. Open the project in **Unity 6.6**.
-2. Open the sample scene at `Assets/Scenes/SampleScene.unity`.
+2. Open `Assets/Scenes/RelicShowcase.unity` to inspect the three modeled relics, or `Assets/Scenes/SampleScene.unity` for the material test scene.
 3. Select a GameObject with a Renderer and a material using the Relic Lab shader.
 4. In the Unity menu, choose **Tools > Relic Lab > Open Relic Lab**.
 5. Assign the GameObject in the **Target GameObject** field if needed. Relic Lab works with **material slot 0**.
@@ -33,7 +35,7 @@ Relic Lab combines a custom **URP Shader Graph** with a **C# EditorWindow** to m
 7. Choose a preset or adjust individual parameters. Changes are previewed on the selected object.
 8. Use **Apply Changes**, **Discard Changes**, or **Save Preview As New Material** depending on whether you want to update, revert, or preserve a new variation.
 
-Generated material assets are stored in `Assets/RelicLab/GeneratedMaterials/`.
+Generated material assets are stored in `Assets/RelicLab/GeneratedMaterials/`. The showcase scene uses the same shader and materials as the editing workflow.
 
 ## Shader Parameters
 
@@ -49,6 +51,20 @@ Generated material assets are stored in `Assets/RelicLab/GeneratedMaterials/`.
 | Smoothness | Surface smoothness and reflection sharpness |
 
 The shader combines **Lit surface shading**, **Fresnel-based rim emission**, and **time-driven emission pulsing**. Metallic appearance depends on the scene's lighting and reflection environment, not only on the Metallic value.
+
+## Relic Showcase
+
+`Assets/Scenes/RelicShowcase.unity` presents three low-poly relics modeled in **Autodesk Maya**, imported into Unity as FBX assets, and shaded with the shared `SG_RelicLit` Shader Graph.
+
+| Relic | Model | Material direction |
+| --- | --- | --- |
+| **Arcane** | Symmetrical, vertically oriented crystal | Cool blue, polished surface, subtle animated emission |
+| **Toxic** | Irregular five-point crystal cluster | Green, rough/matte surface, restrained emission |
+| **Solar** | Octagonal medallion with raised center | Warm gold, metallic surface, controlled emissive pulse |
+
+The scene includes dark metal pedestals, an orthographic presentation camera, a neutral dark background, and accent lighting. The three assets are intentionally different in silhouette and surface response, demonstrating how a single configurable shader can support multiple art directions.
+
+**Lighting note:** High emission values can overpower the visible metallic response. Solar uses a restrained emissive contribution so its Lit reflections remain readable.
 
 ## Editing Workflow
 
@@ -81,17 +97,20 @@ Select an object and material
 
 ```text
 Assets/
+├── Materials/                  # Showcase pedestal material
+├── Models/                     # Maya-authored relic FBX assets
 ├── RelicLab/
 │   ├── Editor/                 # RelicLabWindow.cs
-│   ├── GeneratedMaterials/     # Generated .mat assets
+│   ├── GeneratedMaterials/     # Generated relic .mat assets
 │   └── Shaders/               # SG_RelicLit.shadergraph
 └── Scenes/
-    └── SampleScene.unity
+    ├── SampleScene.unity       # Material test scene
+    └── RelicShowcase.unity     # Three-relic presentation scene
 ```
 
 ## Demo and Screenshots
 
-*Coming soon:* Screenshots of the EditorWindow, side-by-side material variants, and a short demonstration of the non-destructive editing workflow.
+*Planned:* A clean screenshot of `RelicShowcase`, a screenshot of the Relic Lab EditorWindow in use, and a short demonstration of preview, Apply/Discard, and material-variant creation. Demo media has not been added to the repository yet.
 
 ## Project Goal
 
