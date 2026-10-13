@@ -52,13 +52,13 @@ Material:
     m_Ints: []
     m_Floats:
     - _AnimationSpeed: 2.5
-    - _EmissionIntensity: 0.7
+    - _EmissionIntensity: 0.45
     - _Metallic: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RimIntensity: 2.5
+    - _RimIntensity: 1.5
     - _RimPower: 2.5
-    - _Smoothness: 0.9
+    - _Smoothness: 0.8
     m_Colors:
     - _BaseColor: {r: 0.08235294, g: 0.21568628, b: 0.47843137, a: 1}
     - _EmissionColor: {r: 0.14509805, g: 0.8117647, b: 1, a: 1}
