@@ -4,7 +4,11 @@
 
 Relic Lab combines a custom **URP Shader Graph** with a **C# EditorWindow** to make material experimentation faster and safer. Artists and developers can explore three visual presets, adjust shader parameters with immediate feedback, and decide whether to apply, discard, or save their work as a separate material asset.
 
-> **Status:** Portfolio prototype — functional material editing workflow and three-relic showcase scene. Screenshots and demo video are in progress.
+> **Status:** Portfolio prototype — functional material editing workflow and three-relic showcase scene. Screenshots are included below; the demo video is pending.
+
+![Relic Lab showcase with the Arcane, Toxic, and Solar relics](Docs/Images/relic-showcase.jpg)
+
+_The three stylized relics presented with the shared Relic Lab shader._
 
 ## Features
 
@@ -39,16 +43,16 @@ Generated material assets are stored in `Assets/RelicLab/GeneratedMaterials/`. T
 
 ## Shader Parameters
 
-| Property | Purpose |
-| --- | --- |
-| Base Color | Main surface color |
-| Emission Color | Color of the emissive effect |
-| Emission Intensity | Strength of emission |
-| Rim Power | Width/falloff of the Fresnel-based rim effect |
-| Rim Intensity | Strength of the rim contribution |
-| Animation Speed | Speed of the pulsing emission |
-| Metallic | Metallic response of the Lit surface |
-| Smoothness | Surface smoothness and reflection sharpness |
+| Property           | Purpose                                       |
+| ------------------ | --------------------------------------------- |
+| Base Color         | Main surface color                            |
+| Emission Color     | Color of the emissive effect                  |
+| Emission Intensity | Strength of emission                          |
+| Rim Power          | Width/falloff of the Fresnel-based rim effect |
+| Rim Intensity      | Strength of the rim contribution              |
+| Animation Speed    | Speed of the pulsing emission                 |
+| Metallic           | Metallic response of the Lit surface          |
+| Smoothness         | Surface smoothness and reflection sharpness   |
 
 The shader combines **Lit surface shading**, **Fresnel-based rim emission**, and **time-driven emission pulsing**. Metallic appearance depends on the scene's lighting and reflection environment, not only on the Metallic value.
 
@@ -56,11 +60,11 @@ The shader combines **Lit surface shading**, **Fresnel-based rim emission**, and
 
 `Assets/Scenes/RelicShowcase.unity` presents three low-poly relics modeled in **Autodesk Maya**, imported into Unity as FBX assets, and shaded with the shared `SG_RelicLit` Shader Graph.
 
-| Relic | Model | Material direction |
-| --- | --- | --- |
-| **Arcane** | Symmetrical, vertically oriented crystal | Cool blue, polished surface, subtle animated emission |
-| **Toxic** | Irregular five-point crystal cluster | Green, rough/matte surface, restrained emission |
-| **Solar** | Octagonal medallion with raised center | Warm gold, metallic surface, controlled emissive pulse |
+| Relic      | Model                                    | Material direction                                     |
+| ---------- | ---------------------------------------- | ------------------------------------------------------ |
+| **Arcane** | Symmetrical, vertically oriented crystal | Cool blue, polished surface, subtle animated emission  |
+| **Toxic**  | Irregular five-point crystal cluster     | Green, rough/matte surface, restrained emission        |
+| **Solar**  | Octagonal medallion with raised center   | Warm gold, metallic surface, controlled emissive pulse |
 
 The scene includes dark metal pedestals, an orthographic presentation camera, a neutral dark background, and accent lighting. The three assets are intentionally different in silhouette and surface response, demonstrating how a single configurable shader can support multiple art directions.
 
@@ -84,7 +88,17 @@ Select an object and material
  material asset                  (no automatic reassignment)
 ```
 
-**Preset variants** and **saved previews** serve different purposes: creating a preset variant uses that preset's predefined values; saving a preview captures the values currently being previewed.
+![Relic Lab EditorWindow showing the material editing workflow](Docs/Images/relic-lab-editor.jpg)
+
+_The EditorWindow provides access to the selected object's material controls and live preview._
+
+### Material Variant Workflow
+
+Preset variants and saved previews serve different purposes: creating a preset variant uses that preset's predefined values; saving a preview captures the values currently being previewed.
+
+![Generated material variant created with Relic Lab](Docs/Images/relic-mat-variant-generated.jpg)
+
+_A generated material variant is saved as an independent asset in the generated-materials folder._
 
 ## Implementation Notes
 
@@ -106,11 +120,16 @@ Assets/
 └── Scenes/
     ├── SampleScene.unity       # Material test scene
     └── RelicShowcase.unity     # Three-relic presentation scene
+Docs/
+└── Images/
+    ├── relic-showcase.jpg
+    ├── relic-lab-editor.jpg
+    └── relic-mat-variant-generated.jpg
 ```
 
-## Demo and Screenshots
+## Demo Video
 
-*Planned:* A clean screenshot of `RelicShowcase`, a screenshot of the Relic Lab EditorWindow in use, and a short demonstration of preview, Apply/Discard, and material-variant creation. Demo media has not been added to the repository yet.
+A short demonstration of preview, Apply/Discard, and material-variant creation is planned. **Demo video pending.**
 
 ## Project Goal
 
