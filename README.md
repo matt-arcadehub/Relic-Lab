@@ -4,7 +4,7 @@
 
 Relic Lab combines a custom **URP Shader Graph** with a **C# EditorWindow** to make material experimentation faster and safer. Artists and developers can explore three visual presets, adjust shader parameters with immediate feedback, and decide whether to apply, discard, or save their work as a separate material asset.
 
-> **Status:** Portfolio prototype — functional material editing workflow and three-relic showcase scene. Screenshots are included below; the demo video is pending.
+> **Status:** Portfolio prototype — functional material editing workflow and three-relic showcase scene. Screenshots and Video are included below.
 
 ![Relic Lab showcase with the Arcane, Toxic, and Solar relics](Docs/Images/relic-showcase.jpg)
 
@@ -55,6 +55,12 @@ Generated material assets are stored in `Assets/RelicLab/GeneratedMaterials/`. T
 | Smoothness         | Surface smoothness and reflection sharpness   |
 
 The shader combines **Lit surface shading**, **Fresnel-based rim emission**, and **time-driven emission pulsing**. Metallic appearance depends on the scene's lighting and reflection environment, not only on the Metallic value.
+
+## Shader Graph Breakdown
+
+![Relic Lab Shader Graph showing the Lit surface, Fresnel rim, and pulsing emission](Docs/Images/relic-lab-shadergraph.jpg)
+
+_The custom Lit Shader Graph combines a Fresnel-based rim effect with time-driven emission pulsing. Exposed properties let artists adjust color, emission strength, rim response, animation speed, metallic response, and smoothness to create different relic looks._
 
 ## Relic Showcase
 
@@ -121,10 +127,13 @@ Assets/
     ├── SampleScene.unity       # Material test scene
     └── RelicShowcase.unity     # Three-relic presentation scene
 Docs/
-└── Images/
-    ├── relic-showcase.jpg
-    ├── relic-lab-editor.jpg
-    └── relic-mat-variant-generated.jpg
+├── Images/
+│   ├── relic-showcase.jpg
+│   ├── relic-lab-editor.jpg
+│   ├── relic-mat-variant-generated.jpg
+│   └── relic-shadergraph.jpg
+└── Videos/
+    └── relic-lab-demo.mp4
 ```
 
 ## Demo Video
