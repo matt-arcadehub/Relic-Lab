@@ -138,7 +138,9 @@ Docs/
 
 ## Demo Video
 
-A short demonstration of preview, Apply/Discard, and material-variant creation is planned. **Demo video pending.**
+https://github.com/user-attachments/assets/b5109c17-99a3-466f-bda8-c074afa3377e
+
+_The short walkthrough shows material preview, Apply/Discard, and saving a material variant._
 
 ## Project Goal
 
